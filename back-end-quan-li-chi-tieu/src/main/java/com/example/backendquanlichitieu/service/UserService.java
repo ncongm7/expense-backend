@@ -16,9 +16,11 @@
             return userRepo.findAll();
         }
         public User login(String email, String password) {
-            // Giả sử bạn lưu password plaintext (KHÔNG NÊN trong thực tế)
-            return userRepo.findByEmailAndPassword(email, password)
-                    .orElseThrow(() -> new RuntimeException("Email hoặc mật khẩu sai"));
+            User user = userRepo.findByEmail(email); // Giả sử có phương thức này
+            if (user != null && password.equals(user.getPassword())) { // So sánh thô, cần mã hóa
+                return user;
+            }
+            return null;
         }
         public void add(User user) {
 
