@@ -1,4 +1,5 @@
 package com.example.backendquanlichitieu;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,8 +13,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // Cho phép tất cả các endpoint
-                        .allowedOrigins("http://localhost:5173") // Cho phép frontend Vue truy cập
+                registry.addMapping("/**")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://quan-li-tai-chinh.vercel.app"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -21,4 +25,3 @@ public class CorsConfig {
         };
     }
 }
-
