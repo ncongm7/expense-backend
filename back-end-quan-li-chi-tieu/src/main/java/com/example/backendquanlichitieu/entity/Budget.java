@@ -42,4 +42,7 @@ public class Budget {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
+    @Column(name = "actual_amount", nullable = false)
+    private BigDecimal amountSpent;
+
 }
