@@ -13,8 +13,8 @@ public class CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
     //getAllCategories
-    public List<CategoryDTO> getAllCategories() {
-        return categoryRepo.findAll().stream()
+    public List<CategoryDTO> getAllCategories(Long userId) {
+        return categoryRepo.findByUserId(userId).stream()
                 .map(category -> new CategoryDTO(
                         category.getId(),
                         category.getName(),
@@ -27,6 +27,12 @@ public class CategoryService {
     public Category addCatergory(Category category) {
         return categoryRepo.save(category);
     }
+    //delete method
+    public void deleteCategory(Long id) {
+        categoryRepo.deleteById(id);
+    }
+    //getCategory by id
+
 
 
 }

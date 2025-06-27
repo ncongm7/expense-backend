@@ -17,8 +17,9 @@ import java.util.List;
 public class ExpensController {
     @Autowired
     private ExpensesService expensesService;
-    @GetMapping("hien-thi")
+    @GetMapping("hien-thi/{id}")
     public List<ExpensDTO> getFilteredExpenses(
+            @PathVariable Integer id,
             @RequestParam(required = false) String type,
             @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) String fromDate,
@@ -26,7 +27,7 @@ public class ExpensController {
             @RequestParam(required = false) String search
     ) {
 
-        return expensesService.getFilteredExpenses(type, categoryId, fromDate, toDate, search);
+        return expensesService.getFilteredExpenses(id,type, categoryId, fromDate, toDate, search);
     }
 
 
@@ -46,6 +47,37 @@ public class ExpensController {
             return ResponseEntity.ok("Thêm giao dịch thành công!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi lưu giao dịch!");
+        }
+    }
+
+    //Delete expens
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteExpense(@PathVariable Long id) {
+        try {
+            expensesService.deleteExpense(id);
+            return ResponseEntity.ok("Expense deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting expense: " + e.getMessage());
+        }
+    }
+
+    //Update expens
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateExpense(
+            @PathVariable Long id,
+            @RequestParam String type,
+            @RequestParam Double amount,
+            @RequestParam Long categoryId,
+            @RequestParam String notes,
+            @RequestParam String spentAt
+
+//            @RequestParam(required = false) MultipartFile receipt
+    ) {
+        try {
+            expensesService.updateExpense(id, new ExpensDTO(Integer.parseInt(String.valueOf(id)),type, amount, categoryId, notes, spentAt));
+            return ResponseEntity.ok("Expense updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating expense: " + e.getMessage());
         }
     }
 

@@ -49,12 +49,13 @@ public class ExpensesService {
     }
     //loc theo cac thuoc tinh trong ExpensDTO
 
-    public List<ExpensDTO> getFilteredExpenses(String type, Long categoryId, String fromDate, String toDate, String search) {
+    public List<ExpensDTO> getFilteredExpenses(Integer id,String type, Long categoryId, String fromDate, String toDate, String search) {
         // Giả sử bạn có JPA hoặc tự lọc trong list
 
         List<Expens> all = expensRepo.findAll();
 
         return all.stream()
+                .filter(e -> e.getUser().getId() ==id) // Kiểm tra xem user có khác null không
                 .filter(e -> type == null || e.getType().equals(type))
                 .filter(e -> categoryId == null || (e.getCategory() != null && Objects.equals(e.getCategory().getId().longValue(), categoryId)))
 
@@ -102,8 +103,29 @@ public class ExpensesService {
 
         expensRepo.save(expens);
     }
+    //delete method
+    public void deleteExpense(Long id) {
+        expensRepo.deleteById(id);
+    }
 
+    //edit method
+   public Expens updateExpense(Long id, ExpensDTO updatedExpense) {
+    Expens existingExpense = expensRepo.findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy giao dịch với ID: " + id));
 
+    // Cập nhật các trường cần thiết
+    existingExpense.setType(updatedExpense.getType());
+    existingExpense.setAmount(updatedExpense.getAmount());
+    existingExpense.setNote(updatedExpense.getNote());
+    existingExpense.setSpentAt(updatedExpense.getSpentAt());
+    existingExpense.setCategory(
+            categoryRepo.findById(Long.valueOf(updatedExpense.getCategoryId()))
+                        .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với ID: " + updatedExpense.getCategoryId()))
+    );
+
+    // Lưu lại giao dịch đã cập nhật
+    return expensRepo.save(existingExpense);
+}
 
 
 

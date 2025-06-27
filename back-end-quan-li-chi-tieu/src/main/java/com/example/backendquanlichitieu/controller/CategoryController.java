@@ -15,11 +15,11 @@ public class CategoryController {
     //getAllCategories
     @Autowired
     private CategoryService categoryService;
-    @GetMapping("hien-thi")
-    public List<CategoryDTO> getAllCategories() {
-        return categoryService.getAllCategories();
+    @GetMapping("hien-thi/{id}")
+    public List<CategoryDTO> getAllCategories(@PathVariable Long id) {
+        return categoryService.getAllCategories(id);
     }
-    @PostMapping("them")
+    @PostMapping("add")
     //add method dung Category khong dung CategoryDTO
 
     public ResponseEntity<?> themDanhMuc(@RequestBody Category category) {

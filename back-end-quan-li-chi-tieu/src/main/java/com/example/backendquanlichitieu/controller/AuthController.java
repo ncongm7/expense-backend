@@ -44,4 +44,5 @@ public class AuthController {
                     .body(new LoginResponse(null, "Server error: " + e.getMessage()));
         }
     }
+
 }
