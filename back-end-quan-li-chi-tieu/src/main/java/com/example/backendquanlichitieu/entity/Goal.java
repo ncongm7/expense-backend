@@ -42,5 +42,7 @@ public class Goal {
 
     @Column(name = "created_at")
     private Instant createdAt;
+    @Column(name = "url_image", length = Integer.MAX_VALUE)
+    private  String urlImage;
 
 }
