@@ -17,11 +17,21 @@ public class GoalDTO {
     private BigDecimal currentAmount;
     private LocalDate deadline;
     private String note;
-    private Instant createdAt;
+    private LocalDate  createdAt;
     private  String urlImage;
 
     public GoalDTO() {
     }
 
+    public GoalDTO(Integer userId, String title, BigDecimal targetAmount, BigDecimal currentAmount, LocalDate deadline, String note, LocalDate  createdAt, String urlImage) {
+        this.userId = userId;
+        this.title = title;
+        this.targetAmount = targetAmount;
+        this.currentAmount = currentAmount;
+        this.deadline = deadline;
+        this.note = note;
+        this.createdAt = createdAt;
+        this.urlImage = urlImage;
+    }
     // Getters and Setters
 }

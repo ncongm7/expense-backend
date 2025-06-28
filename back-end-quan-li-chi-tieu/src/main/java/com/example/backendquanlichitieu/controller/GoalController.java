@@ -4,6 +4,8 @@ import com.example.backendquanlichitieu.dto.GoalDTO;
 import com.example.backendquanlichitieu.entity.Goal;
 import com.example.backendquanlichitieu.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,5 +31,26 @@ public class GoalController {
         goalService.deleteGoal(id);
 
     }
+    //add method
+    @PostMapping("/add")
+    public ResponseEntity<?> addGoal(@RequestBody GoalDTO goalDto) {
+        try {
+            Goal savedGoal = goalService.addGoal(goalDto);
+            return ResponseEntity.ok(savedGoal);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Lỗi thêm mục tiêu: " + e.getMessage());
+        }
+    }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateGoal(@PathVariable Long id, @RequestBody GoalDTO goalDto) {
+        try {
+            Goal updatedGoal = goalService.updateGoal(id, goalDto);
+            return ResponseEntity.ok(updatedGoal);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Lỗi cập nhật mục tiêu: " + e.getMessage());
+        }
+    }
 }

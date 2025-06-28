@@ -41,7 +41,7 @@ public class Goal {
     private String note;
 
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDate  createdAt;
     @Column(name = "url_image", length = Integer.MAX_VALUE)
     private  String urlImage;
 

@@ -14,9 +14,9 @@ public class BudgetService {
     @Autowired
     private BudgetRepo budgetRepo;
     //Get All
-    public List<BudgetDTO> getAllBudgets() {
+    public List<BudgetDTO> getAllBudgets(Long id) {
         // Logic to retrieve all budgets
-         return (List<BudgetDTO>) budgetRepo.findAll().stream().map(
+         return (List<BudgetDTO>) budgetRepo.findByUserId(id).stream().map(
                  budget ->  new BudgetDTO(
                          budget.getId(),
                          budget.getCategory().getName(),

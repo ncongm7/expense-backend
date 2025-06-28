@@ -20,6 +20,7 @@ public class CategoryController {
         return categoryService.getAllCategories(id);
     }
     @PostMapping("add")
+
     //add method dung Category khong dung CategoryDTO
 
     public ResponseEntity<?> themDanhMuc(@RequestBody Category category) {
