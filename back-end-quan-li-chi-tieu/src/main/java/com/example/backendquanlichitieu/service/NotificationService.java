@@ -34,6 +34,13 @@ public class NotificationService {
         dto.setRelatedEntityId(n.getRelatedEntityId());
         dto.setActionUrl(n.getActionUrl());
         dto.setUserId(Long.valueOf(n.getUser() != null ? n.getUser().getId() : null));
+        dto.setCreated(n.getCreated());
         return dto;
+    }
+    //láy số lượng thông báo chưa đọc
+    public long countUnreadNotifications(Long userId) {
+        return notificationRepo.findAllByUserId(userId).stream()
+                .filter(notification -> !notification.getRead())
+                .count();
     }
 }

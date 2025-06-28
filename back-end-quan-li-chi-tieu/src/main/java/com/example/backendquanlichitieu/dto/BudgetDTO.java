@@ -18,8 +18,11 @@ public class BudgetDTO {
     private BigDecimal amountSpent;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Long userId;
+    private Long categoryId;
 
-    public BudgetDTO(Integer id, String categoryName, BigDecimal amount, BigDecimal amountSpent, LocalDate startDate, LocalDate endDate) {
+    public BudgetDTO(String period ,Integer id, String categoryName, BigDecimal amount, BigDecimal amountSpent, LocalDate startDate, LocalDate endDate) {
+        this.period = period;
         this.id = id;
         this.categoryName = categoryName;
         this.amount = amount;

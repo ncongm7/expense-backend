@@ -4,6 +4,7 @@ package com.example.backendquanlichitieu.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class NotificationDTO {
@@ -18,4 +19,5 @@ public class NotificationDTO {
     private Integer relatedEntityId;
     private String actionUrl;
     private Long userId; // chỉ trả về ID thay vì cả object User
+    private LocalDateTime created;
 }

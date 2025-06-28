@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -56,5 +57,7 @@ public class Notification {
 
     @Column(name = "action_url", length = Integer.MAX_VALUE)
     private String actionUrl;
+    @Column(name = "created", nullable = false)
+    private LocalDateTime created;
 
 }

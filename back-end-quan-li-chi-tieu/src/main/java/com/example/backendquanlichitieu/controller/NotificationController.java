@@ -21,4 +21,9 @@ public class NotificationController {
     public List<NotificationDTO> getAllNotifications(@PathVariable Long userId) {
         return notificationService.getAllNotifications(userId);
     }
+    //getUnreadCount
+    @GetMapping("count-unread/{userId}")
+    public long countUnreadNotifications(@PathVariable Long userId) {
+        return notificationService.countUnreadNotifications(userId);
+    }
 }
