@@ -65,13 +65,12 @@ public class ExpensesService {
                 .map(e -> new ExpensDTO(
                         e.getId(),
                         e.getUser().getUsername(),
-                        e.getCategory().getName(),
+                        e.getCategory() != null ? e.getCategory().getName() : "Chưa phân loại", // Kiểm tra xem category có khác null không
                         e.getType(),
                         e.getAmount(),
                         e.getNote(),
                         e.getSpentAt(),
-                        e.getCategory().getId()))
-
+                         e.getCategory() != null ? e.getCategory().getId() : null))
                 .collect(Collectors.toList());
     }
 
@@ -124,7 +123,21 @@ public class ExpensesService {
     );
 
     // Lưu lại giao dịch đã cập nhật
-    return expensRepo.save(existingExpense);
+    return expensRepo.save(existingExpense); }
+
+    //findUncategorizedExpensesByUserId
+       public List<ExpensDTO> findUncategorizedExpensesByUserId( Long userId) {
+        List<Expens> uncategorizedExpenses = expensRepo.findUncategorizedExpensesByUserId(userId);
+        return uncategorizedExpenses.stream()
+                .map(expens -> new ExpensDTO(
+                        expens.getId(),
+                        "Chưa phân loại", // Kiểm tra xem category có khác null không
+                         // Không có category name
+                        expens.getAmount(),
+                        expens.getNote(),
+                        expens.getSpentAt()))
+                .collect(Collectors.toList());
+
 }
 
 

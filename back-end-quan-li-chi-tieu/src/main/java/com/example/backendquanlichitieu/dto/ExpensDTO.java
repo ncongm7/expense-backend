@@ -57,4 +57,12 @@ public class ExpensDTO {
             this.spentAt = LocalDate.now(); // Default to today if spentAt is null or empty
         }
     }
+
+    public ExpensDTO(Integer id, String categoryName, BigDecimal amount, String note, LocalDate spentAt) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.amount = amount;
+        this.note = note;
+        this.spentAt = spentAt;
+    }
 }

@@ -29,5 +29,6 @@ public class MoneyJarController {
         // Logic to retrieve the summary of money jars for a user
         return moneyJarService.getMoneyJarSumary(userId);
     }
+    //
 }
 

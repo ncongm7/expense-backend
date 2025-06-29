@@ -81,6 +81,11 @@ public class ExpensController {
         }
     }
 
+    @GetMapping("/unclassified/{id}")
+    public List<ExpensDTO> getUnclassifiedExpenses(@PathVariable Long id) {
+        return expensesService.findUncategorizedExpensesByUserId(id);
+    }
+
 
 
 }
