@@ -62,4 +62,8 @@ public class MoneyJar {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
+    @Size(max = 5)
+    @Column(name = "shortcode", length = 5)
+    private String shortcode;
+
 }

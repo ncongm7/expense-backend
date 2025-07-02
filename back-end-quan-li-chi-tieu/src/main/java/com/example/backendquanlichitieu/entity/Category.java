@@ -26,4 +26,8 @@ public class Category {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "money_jar_id")
+    private MoneyJar moneyJar;
+
 }

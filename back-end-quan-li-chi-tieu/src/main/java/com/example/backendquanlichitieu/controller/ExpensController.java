@@ -46,7 +46,9 @@ public class ExpensController {
             expensesService.saveExpense(type, amount, categoryId, notes, spentAt, userId, receipt);
             return ResponseEntity.ok("Thêm giao dịch thành công!");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi lưu giao dịch!");
+            e.printStackTrace(); // hoặc log.error("Lỗi:", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Lỗi khi lưu giao dịch: " + e.getMessage());
         }
     }
 

@@ -19,11 +19,12 @@ public class CategoryController {
     public List<CategoryDTO> getAllCategories(@PathVariable Long id) {
         return categoryService.getAllCategories(id);
     }
+
+    ///add method dung Category khong dung CategoryDTO
     @PostMapping("add")
 
-    //add method dung Category khong dung CategoryDTO
-
-    public ResponseEntity<?> themDanhMuc(@RequestBody Category category) {
+    public ResponseEntity<?> themDanhMuc(@RequestBody CategoryDTO category) {
+        System.out.println("Received category: " + category);
         return ResponseEntity.ok(categoryService.addCatergory(category));
     }
 }

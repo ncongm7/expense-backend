@@ -15,6 +15,7 @@ public class MoneyJarDTO {
     private Long userId;
     private String jarName;
     private String jarDisplayName;
+
     private BigDecimal percentage;
     private BigDecimal targetAmount;
     private BigDecimal currentAmount;
@@ -23,7 +24,8 @@ public class MoneyJarDTO {
     private String description;
     private LocalDate createdAt;
     private LocalDate updatedAt;
-    ///
+
+    private String shortcode; // Tên người dùng sở hữu MoneyJar
 
     public MoneyJarDTO(BigDecimal percentage, BigDecimal targetAmount, BigDecimal currentAmount, BigDecimal remainingAmount) {
         this.percentage = percentage;
@@ -34,4 +36,10 @@ public class MoneyJarDTO {
 
     private BigDecimal remainingAmount; // Số tiền còn lại để đạt mục tiêu
 
+    public MoneyJarDTO(Integer id, String color, String shortcode, String jarDisplayName) {
+        this.id = id;
+        this.color = color;
+        this.shortcode = shortcode;
+        this.jarDisplayName = jarDisplayName;
+    }
 }
